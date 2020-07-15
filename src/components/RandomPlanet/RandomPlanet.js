@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import api from '../../services/swapi-service';
+import Spinner from '../Spinner/Spinner';
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
   state = {
-    name: null,
-    population: null,
-    rotationPeriod: null,
-    diameter: null,
-    imageId: null
+    planet: {},
+    loading: true
   }
   constructor() {
     super();
@@ -18,43 +16,50 @@ export default class RandomPlanet extends Component {
   updatePlanet(){
     const id = Math.floor(Math.random()*18+1);
     api.getPlanet(id).then(planet=>{
-      this.setState({
-        name: planet.name,
-        population: planet.population,
-        rotationPeriod: planet.rotation_period,
-        diameter: planet.diameter,
-        imageId: id  
-      })
+      this.setState({planet, loading: false})
     })
   }
 
 
 
   render() {
-    const {name, population, rotationPeriod, diameter, imageId} = this.state;
+    const {planet, loading} = this.state;
+    const content = loading ? <Spinner /> : <PlanetCard planet={planet}/>
     return (
+      
       <div className="random-planet jumbotron rounded">
-        <img className="planet-image"
-             src={`https://starwars-visualguide.com/assets/img/planets/${imageId}.jpg`} />
-        <div>
-          <h4>{name}</h4>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              <span className="term">{population}</span>
-              <span>123124</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">{rotationPeriod}</span>
-              <span>43</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">{diameter}</span>
-              <span>100</span>
-            </li>
-          </ul>
-        </div>
+        {content}
       </div>
 
     );
   }
 }
+
+
+const PlanetCard = ({planet: {name, population, rotationPeriod, diameter, imageId}}) => {
+  console.log(name);
+  return (
+    <>
+      <img className="planet-image"
+             src={`https://starwars-visualguide.com/assets/img/planets/${imageId}.jpg`} />
+        <div>
+          <h4>{name}</h4>
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item">
+              <span className="term">Population</span>
+              <span>{population}</span>
+            </li>
+            <li className="list-group-item">
+              <span className="term">Rotation Period</span>
+              <span>{rotationPeriod}</span>
+            </li>
+            <li className="list-group-item">
+              <span className="term">Diameter</span>
+              <span>{diameter}</span>
+            </li>
+          </ul>
+        </div> 
+    </>
+  );
+};
+

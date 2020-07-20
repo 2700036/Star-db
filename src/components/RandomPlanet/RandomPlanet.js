@@ -7,14 +7,20 @@ export default class RandomPlanet extends Component {
   state = {
     planet: {},
     loading: true
-  }
-  constructor() {
-    super();
-    this.updatePlanet()
-  }
+  }  
+  interval = () => {setInterval(this.updatePlanet, 3000)}
 
-  updatePlanet(){
-    const id = Math.floor(Math.random()*18+1);
+  componentDidMount() {
+    this.updatePlanet()
+    this.interval();
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+  
+
+  updatePlanet = () => {
+    const id = Math.floor(Math.random()*17+2);
     api.getPlanet(id).then(planet=>{
       this.setState({planet, loading: false})
     })

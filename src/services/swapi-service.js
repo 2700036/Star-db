@@ -8,7 +8,7 @@ class SwapiService {
     .catch(err => console.log(`Добавление карточки: ${err}`));
   }
 
-  getAllPeople() {
+  getAllPeople = () => {
     return this.getResource(`/people/`)
     .then(res=>{
       return res.results.map(this._transformPerson)
@@ -16,9 +16,9 @@ class SwapiService {
   }  
   getPerson(id) {
     return this.getResource(`/people/${id}/`)
-    .then(person=>this._transformPlanet(person))
+    .then(person=>this._transformPerson(person))
   }
-  getAllPlanets() {
+  getAllPlanets = () => {
     return this.getResource(`/planets/`)
     .then(res=>{
       return res.results.map(this._transformPlanet)
@@ -28,7 +28,7 @@ class SwapiService {
     return this.getResource(`/planets/${id}/`)
     .then(planet=>this._transformPlanet(planet))
   }
-  getAllStarships() {
+  getAllStarships = () => {
     return this.getResource(`/starships/`)
     .then(res=>{
       return res.results.map(this._transformStarship)
@@ -57,16 +57,17 @@ class SwapiService {
       crew: starship.crew,
       passangers: starship.passangers,
       cargoCapacity: starship.cargoCapacity,      
-      imageId: starship.url.match(/\/(\d{2})\//)[1]  
+      imageId: starship.url.match(/\/(\d\d?)\//)[1]  
     }
   }
   _transformPerson(person) {
+    console.log(person);
     return {
-      id: person.url.match(/\/(\d{2})\//)[1] ,
+      id: person.url.match(/\/(\d\d?)\//)[1] ,
       name: person.name,
       gender: person.gender,
-      birthYear: person.birthYear,
-      eyeColor: person.eyeColor
+      birthYear: person.birth_year,
+      eyeColor: person.eye_color
     }
   }
 }

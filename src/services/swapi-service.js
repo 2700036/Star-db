@@ -61,7 +61,7 @@ class SwapiService {
     }
   }
   _transformPerson(person) {
-    console.log(person);
+   
     return {
       id: person.url.match(/\/(\d\d?)\//)[1] ,
       name: person.name,

@@ -43,7 +43,7 @@ export default class RandomPlanet extends Component {
 
 
 const PlanetCard = ({planet: {name, population, rotationPeriod, diameter, imageId}}) => {
-  console.log(name);
+  
   return (
     <>
       <img className="planet-image"

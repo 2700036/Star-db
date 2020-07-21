@@ -12,7 +12,7 @@ export default class PersonDetails extends Component {
 
   updatePerson(){
     const {personId} = this.props;
-    console.log(personId);
+    console.log(personId);    
     api.getPerson(personId).then(person=>{
       this.setState({person})
       this.setState({isLoading: false})
@@ -21,6 +21,7 @@ export default class PersonDetails extends Component {
   
   componentDidUpdate(prevProps) {
     if(prevProps.personId !== this.props.personId){
+      console.log(123);  
       this.setState({isLoading: true})
       this.updatePerson()
     }

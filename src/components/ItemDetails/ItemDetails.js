@@ -3,18 +3,18 @@ import api from '../../services/swapi-service';
 import Spinner from '../Spinner/Spinner';
 import './person-details.css';
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
 
   state = {
-    person: {},
+    item: false,
     isLoading: false
   }
 
   updatePerson(){
     const {personId} = this.props;
     console.log(personId);    
-    api.getPerson(personId).then(person=>{
-      this.setState({person})
+    api.getPerson(personId).then(item=>{
+      this.setState({item})
       this.setState({isLoading: false})
     })
   }
@@ -27,12 +27,12 @@ export default class PersonDetails extends Component {
     }
   }
   render() {
-    const {personId} = this.props;
+    const {item, isLoading} = this.state;
     
-    if(!personId){
-      return <span>Select person from list</span>
+    if(!item){
+      return <span>Select an item from a list</span>
     }   
-    const {person: {birthYear, eyeColor, gender, name, id}, isLoading} = this.state
+    const {birthYear, eyeColor, gender, name, id} = item
     const content = isLoading ? <Spinner /> :  (
     <>
     <img className="person-image"

@@ -1,6 +1,6 @@
 import React from 'react';
 import ItemList from '../ItemList/ItemList';
-import PersonDetails from '../PersonDetails/PersonDetails';
+import ItemDetails from '../ItemDetails/ItemDetails';
 import Raw from '../Raw/Raw';
 import api from '../../services/swapi-service';
 
@@ -19,7 +19,7 @@ const PeoplePage = () => {
           />
   );
   const personDetails = (
-    <PersonDetails personId={personId}/>
+    <ItemDetails personId={personId}/>
   );
 
   return (   

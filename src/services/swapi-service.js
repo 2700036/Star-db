@@ -2,7 +2,7 @@ class SwapiService {
 
   _apiBase = 'https://swapi.dev/api';
 
-  getResource(url) {
+  getResource = (url) => {
     return fetch(`${this._apiBase}${url}`)
     .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
     .catch(err => console.log(`Добавление карточки: ${err}`));
@@ -14,7 +14,7 @@ class SwapiService {
       return res.results.map(this._transformPerson)
     })    
   }  
-  getPerson(id) {
+  getPerson = (id) => {
     return this.getResource(`/people/${id}/`)
     .then(person=>this._transformPerson(person))
   }
@@ -24,7 +24,7 @@ class SwapiService {
       return res.results.map(this._transformPlanet)
     })
   }
-  getPlanet(id) {
+  getPlanet = (id) => {
     return this.getResource(`/planets/${id}/`)
     .then(planet=>this._transformPlanet(planet))
   }
@@ -34,7 +34,7 @@ class SwapiService {
       return res.results.map(this._transformStarship)
     })    
   }
-  getStarship(id) {
+  getStarship = (id) => {
     return this.getResource(`/starships/${id}/`)
     .then(starship=>this._transformPlanet(starship))
   }  
@@ -70,6 +70,17 @@ class SwapiService {
       eyeColor: person.eye_color
     }
   }
+
+  getPersonImage = ({id}) => {
+    return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
+  }
+  getStarshipImage = ({id}) => {
+    return `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`
+  }
+  getPlanetImage = ({id}) => {
+    return `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`
+  }
+
 }
 const api = new SwapiService();
 

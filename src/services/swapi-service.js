@@ -38,8 +38,9 @@ export default class SwapiService {
     return this.getResource(`/starships/${id}/`)
     .then(starship=>this._transformPlanet(starship))
   }  
-  _transformPlanet(planet){
+  _transformPlanet(planet){    
     return {
+      id: planet.url.match(/\/(\d\d?)\//)[1],
       name: planet.name,
       population: planet.population,
       rotationPeriod: planet.rotation_period,
@@ -49,6 +50,7 @@ export default class SwapiService {
   }
   _transformStarship(starship){
     return {
+      id: starship.url.match(/\/(\d\d?)\//)[1],
       name: starship.name,
       model: starship.model,
       manufacturer: starship.manufacturer,
@@ -63,7 +65,7 @@ export default class SwapiService {
   _transformPerson(person) {
    
     return {
-      id: person.url.match(/\/(\d\d?)\//)[1] ,
+      id: person.url.match(/\/(\d\d?)\//)[1],
       name: person.name,
       gender: person.gender,
       birthYear: person.birth_year,

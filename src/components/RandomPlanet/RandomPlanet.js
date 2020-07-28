@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Spinner from '../Spinner/Spinner';
 import './random-planet.css';
 import withSwapiService from '../hoc-helpers/WithSwapiServise';
@@ -50,6 +49,8 @@ class RandomPlanet extends Component {
 }
 
 export default withSwapiService(RandomPlanet, mapPlanetMethodsToProps)
+
+
 
 
 const PlanetCard = ({planet: {name, population, rotationPeriod, diameter, imageId}}) => {

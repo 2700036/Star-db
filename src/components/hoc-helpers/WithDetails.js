@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Spinner from '../Spinner/Spinner';
 
-const withDetails = (Wrapped, getData, getImageUrl) => {
+const withDetails = (Wrapped) => {
   
   return class extends Component {
     
@@ -12,9 +12,9 @@ const withDetails = (Wrapped, getData, getImageUrl) => {
     }
     updateItem(){
       const {itemId} = this.props;
-      getData(itemId).then(item=>{
+      this.props.getData(itemId).then(item=>{
         this.setState({item,
-        image: getImageUrl(item)})
+        image: this.props.getImageUrl(item)})
         this.setState({isLoading: false})
       })
     }

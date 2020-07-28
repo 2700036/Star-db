@@ -7,10 +7,13 @@ import { PersonDetails, StarshipDetails, PlanetDetails } from '../sw-components/
 import Record from '../Record/Record';
 
 
+
 import './app.css';
+import { SwapiProvider } from '../SwapiContext/SwapiContext';
+import SwapiService from '../../services/swapi-service';
 
 const App = () => {  
-
+  const swapiService = new SwapiService();
   const [personId, setPersonId] = React.useState(null)
   const onPersonselected = (id) =>{
     setPersonId(id) 
@@ -32,17 +35,16 @@ const App = () => {
   );
   
   return (
+    <SwapiProvider value={swapiService}>
     <div className='stardb-app'>
       <Header />
       <RandomPlanet />
       <Raw 
       left={personList} 
       right={personDetails} 
-      />
-      
-
-      
+      />   
     </div>
+    </SwapiProvider>
   );
 };
 

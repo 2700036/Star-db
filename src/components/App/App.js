@@ -4,6 +4,8 @@ import RandomPlanet from '../RandomPlanet/RandomPlanet';
 import Raw from '../Raw/Raw';
 import { PersonList, PlanetList, StarshipList } from '../sw-components/sw-lists';
 import { PersonDetails, StarshipDetails, PlanetDetails } from '../sw-components/sw-details';
+import Record from '../Record/Record';
+
 
 import './app.css';
 
@@ -22,7 +24,11 @@ const App = () => {
   );
 
   const personDetails = (
-    <PersonDetails itemId={personId}/>
+    <PersonDetails itemId={personId}>
+      <Record field='gender' label='Gender' />
+       <Record field='birthYear' label='Birth Year' />
+       <Record field='eyeColor' label='Eye Color' />
+    </PersonDetails>
   );
   
   return (

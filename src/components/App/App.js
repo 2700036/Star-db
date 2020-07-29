@@ -10,8 +10,7 @@ import StarshipPage from '../pages/StarShipsPage';
 
 
 const App = () => {  
-  const swapiService = new SwapiService();
-  
+  const swapiService = new SwapiService(); 
   
   return (
     <SwapiProvider value={swapiService}>

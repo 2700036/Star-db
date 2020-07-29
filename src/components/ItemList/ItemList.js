@@ -9,7 +9,7 @@ const ItemList = ({onItemSelected, itemRenderer, data}) => {
         key={name+id}
         onClick={()=>onItemSelected(id)}
         >
-          {itemRenderer(item)}
+          {name}
         </li>
       )
     })     

@@ -14,7 +14,7 @@ const PlanetPage = () => {
   const planetList = (
     <PlanetList     
     onItemSelected={onItemSelected}
-    itemRenderer={item=>`${item.name} (Population: ${item.population})`}
+    
     />
   );
 

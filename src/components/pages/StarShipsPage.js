@@ -14,15 +14,15 @@ const StarshipPage = () => {
   const starshipList = (
     <StarshipList     
     onItemSelected={onItemSelected}
-    itemRenderer={item=>`${item.name} (Population: ${item.population})`}
+    
     />
   );
 
   const starshipDetails = (
     <StarshipDetails itemId={itemId}>
-      <Record field='population' label='Population' />
-      <Record field='rotationPeriod' label='Rotation' />
-      <Record field='diameter' label='Diameter' /> 
+      <Record field='model' label='Model' />
+      <Record field='starshipClass' label='Class' />
+      <Record field='length' label='Length' />
     </StarshipDetails>
   );
   

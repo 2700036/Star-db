@@ -31,14 +31,16 @@ export default class SwapiService {
   getAllStarships = () => {
     return this.getResource(`/starships/`)
     .then(res=>{
+      console.log(res);
       return res.results.map(this._transformStarship)
     })    
   }
   getStarship = (id) => {
     return this.getResource(`/starships/${id}/`)
-    .then(starship=>this._transformPlanet(starship))
+    .then(starship=>this._transformStarship(starship))
   }  
-  _transformPlanet(planet){    
+  _transformPlanet(planet){ 
+       
     return {
       id: planet.url.match(/\/(\d\d?)\//)[1],
       name: planet.name,
@@ -49,12 +51,13 @@ export default class SwapiService {
     }
   }
   _transformStarship(starship){
+    console.log(starship);
     return {
       id: starship.url.match(/\/(\d\d?)\//)[1],
       name: starship.name,
       model: starship.model,
       manufacturer: starship.manufacturer,
-      costInCredits: starship.costInCredits,
+      starshipClass: starship.starship_class,
       length: starship.length,
       crew: starship.crew,
       passangers: starship.passangers,

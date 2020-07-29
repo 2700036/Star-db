@@ -13,8 +13,7 @@ const PersonPage = () => {
 
   const personList = (
     <PersonList     
-    onItemSelected={onItemSelected}
-    itemRenderer={item=>`${item.name} (birth year: ${item.birthYear})`}
+    onItemSelected={onItemSelected}    
     />
   );
 

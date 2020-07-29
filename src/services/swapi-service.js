@@ -31,7 +31,6 @@ export default class SwapiService {
   getAllStarships = () => {
     return this.getResource(`/starships/`)
     .then(res=>{
-      console.log(res);
       return res.results.map(this._transformStarship)
     })    
   }
@@ -50,8 +49,7 @@ export default class SwapiService {
       imageId: planet.url.match(/\/(\d\d?)\//)[1]  
     }
   }
-  _transformStarship(starship){
-    console.log(starship);
+  _transformStarship(starship){    
     return {
       id: starship.url.match(/\/(\d\d?)\//)[1],
       name: starship.name,

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Spinner from '../Spinner/Spinner';
 import './random-planet.css';
 import withSwapiService from '../hoc-helpers/WithSwapiServise';
+import PropTypes from 'prop-types';
+
 
 const mapPlanetMethodsToProps = (swapiService) =>{
   return {
@@ -46,6 +48,10 @@ class RandomPlanet extends Component {
 
     );
   }
+
+  static propTypes = {
+    getPlanet: PropTypes.func.isRequired
+  }
 }
 
 export default withSwapiService(RandomPlanet, mapPlanetMethodsToProps)
@@ -58,6 +64,7 @@ const PlanetCard = ({planet: {name, population, rotationPeriod, diameter, imageI
   return (
     <>
       <img className="planet-image"
+            alt={name}
              src={`https://starwars-visualguide.com/assets/img/planets/${imageId}.jpg`} />
         <div>
           <h4>{name}</h4>

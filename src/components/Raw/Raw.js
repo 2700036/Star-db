@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 const Raw = ({left, right}) => {
   return (
@@ -14,6 +16,11 @@ const Raw = ({left, right}) => {
     </>
   );
 };
+
+Raw.propTypes = {
+  left: PropTypes.node, 
+  right: PropTypes.node
+}
 
 
 

@@ -12,8 +12,7 @@ const withDetails = (Wrapped) => {
     }
     updateItem(){
       const {itemId} = this.props;     
-      this.props.getData(itemId).then(item=>{
-        console.log(item);
+      this.props.getData(itemId).then(item=>{        
         this.setState({item,
         image: this.props.getImageUrl(item)})
         this.setState({isLoading: false})

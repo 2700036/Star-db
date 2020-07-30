@@ -7,10 +7,7 @@ const PlanetPage = ({history}) => {
   return (
     <PlanetList     
     onItemSelected={(itemId)=>{
-      history.push(`/planets/${itemId}`)
-    }}
-    
-    />
+      history.push(itemId)}} />
   )
 }
 

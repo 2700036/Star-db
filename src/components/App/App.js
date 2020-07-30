@@ -29,6 +29,7 @@ const App = () => {
           <Route path='/planets' component={PlanetPage} exact />
           <Route path='/starships' component={StarshipPage} exact />
           <Route path='/starships/:id' render={({ match }) => {
+            console.log(match);
               const id = match.params.id;
               return (
                 <StarshipDetails itemId={id}>

@@ -1,37 +1,17 @@
 import React from 'react';
-import Raw from '../Raw/Raw';
-import Record from '../Record/Record';
 import { StarshipList } from '../sw-components/sw-lists';
-import { StarshipDetails } from '../sw-components/sw-details';
+import { withRouter } from 'react-router-dom';
 
 
-const StarshipPage = () => {
-  const [itemId, setItemId] = React.useState(null)
-  const onItemSelected = (id) =>{
-    setItemId(id)
-  }
-
-  const starshipList = (
-    <StarshipList     
-    onItemSelected={onItemSelected}
-    
-    />
-  );
-
-  const starshipDetails = (
-    <StarshipDetails itemId={itemId}>
-      <Record field='model' label='Model' />
-      <Record field='starshipClass' label='Class' />
-      <Record field='length' label='Length' />
-    </StarshipDetails>
-  );
-  
+const StarshipPage = ({history}) => {  
   return (
-    <Raw 
-      left={starshipList} 
-      right={starshipDetails} 
-      />  
+    <StarshipList     
+    onItemSelected={(itemId)=>{
+      history.push(`/starships/${itemId}`)
+    }}
+    
+    /> 
   )
 }
 
-export default StarshipPage;
+export default withRouter(StarshipPage);

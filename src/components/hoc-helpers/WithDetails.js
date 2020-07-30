@@ -18,9 +18,13 @@ const withDetails = (Wrapped) => {
         this.setState({isLoading: false})
       })
     }
+    componentDidMount() {
+      this.setState({isLoading: true})
+        this.updateItem()
+    }
     
-    componentDidUpdate(prevProps) {
-      
+    
+    componentDidUpdate(prevProps) {      
       if(prevProps.itemId !== this.props.itemId){    
         this.setState({isLoading: true})
         this.updateItem()

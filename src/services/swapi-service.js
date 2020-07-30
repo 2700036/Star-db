@@ -2,7 +2,8 @@ export default class SwapiService {
 
   _apiBase = 'https://swapi.dev/api';
 
-  getResource = (url) => {
+  getResource = (url) => { 
+    console.log(url);   
     return fetch(`${this._apiBase}${url}`)
     .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
     .catch(err => console.log(`Добавление карточки: ${err}`));
@@ -49,7 +50,8 @@ export default class SwapiService {
       imageId: planet.url.match(/\/(\d\d?)\//)[1]  
     }
   }
-  _transformStarship(starship){    
+  _transformStarship(starship){ 
+       
     return {
       id: starship.url.match(/\/(\d\d?)\//)[1],
       name: starship.name,

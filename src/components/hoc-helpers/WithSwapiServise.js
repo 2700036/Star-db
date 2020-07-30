@@ -1,10 +1,10 @@
 import React from 'react';
-import { SwapiConsumer } from '../SwapiContext/SwapiContext';
+import SwapiContext from '../SwapiContext/SwapiContext';
 
-const withSwapiService = (Wrapped, mapMethodsToProps) => {
+const withSwapiService = (Wrapped, mapMethodsToProps) => {  
   return (props)=>{
     return (
-    <SwapiConsumer>
+    <SwapiContext.Consumer>
       { (swapiService)=>{
         const serviceProps = mapMethodsToProps(swapiService)
     return (
@@ -12,7 +12,7 @@ const withSwapiService = (Wrapped, mapMethodsToProps) => {
     )
       }
       }
-    </SwapiConsumer>
+    </SwapiContext.Consumer>
     )
   }
 }

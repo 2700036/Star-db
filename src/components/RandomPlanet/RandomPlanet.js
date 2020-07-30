@@ -1,63 +1,42 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Spinner from '../Spinner/Spinner';
-import './random-planet.css';
-import withSwapiService from '../hoc-helpers/WithSwapiServise';
 import PropTypes from 'prop-types';
+import './random-planet.css';
+import SwapiContext from '../SwapiContext/SwapiContext';
 
 
-const mapPlanetMethodsToProps = (swapiService) =>{
-  return {
-    getPlanet: swapiService.getPlanet    
-  }
-}
-
-
-class RandomPlanet extends Component {
-  state = {
-    planet: {},
-    loading: true
-  }  
-  interval = () => {setInterval(this.updatePlanet, 3000)}
-
-  componentDidMount() {
-    this.updatePlanet()
-    this.interval();
-  }
-  componentWillUnmount() {
-    clearInterval(this.interval)
-  }
+const RandomPlanet = () => {
+  const [planet, setPlanet] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const {getPlanet} = useContext(SwapiContext);  
   
-
-  updatePlanet = () => {
+  const interval = () => {setInterval(updatePlanet, 5000)}
+  const updatePlanet = () => {
     const id = Math.floor(Math.random()*17+2);
-    this.props.getPlanet(id).then(planet=>{
-      this.setState({planet, loading: false})
+    getPlanet(id).then(planet=>{
+      setPlanet(planet);
+      setLoading(false);
     })
   }
 
+  useEffect(()=>{
+    updatePlanet();
+    interval();
+    return ()=>{
+      clearInterval(interval)
+    }
+  }, []) 
+  
+  const content = loading ? <Spinner /> : <PlanetCard planet={planet}/>
 
-
-  render() {
-    const {planet, loading} = this.state;
-    const content = loading ? <Spinner /> : <PlanetCard planet={planet}/>
-    return (
-      
+  return (    
       <div className="random-planet jumbotron rounded">
         {content}
-      </div>
-
-    );
-  }
-
-  static propTypes = {
-    getPlanet: PropTypes.func.isRequired
-  }
+      </div>    
+  )  
 }
 
-export default withSwapiService(RandomPlanet, mapPlanetMethodsToProps)
-
-
-
+export default RandomPlanet;
 
 const PlanetCard = ({planet: {name, population, rotationPeriod, diameter, imageId}}) => {
   
@@ -87,3 +66,12 @@ const PlanetCard = ({planet: {name, population, rotationPeriod, diameter, imageI
   );
 };
 
+PlanetCard.propTypes = {
+  planet: PropTypes.shape({
+    name: PropTypes.string.isRequired, 
+    population: PropTypes.string.isRequired, 
+    rotationPeriod: PropTypes.string.isRequired, 
+    diameter: PropTypes.string.isRequired, 
+    imageId: PropTypes.string.isRequired
+  })
+}

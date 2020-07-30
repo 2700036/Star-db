@@ -35,11 +35,3 @@ export {
   StarshipDetails,
   PlanetDetails
 }
-
-      // <Record field='model' label='Model' />
-      // <Record field='costInCredits' label='Cost' />
-      // <Record field='length' label='Length' />
-
-      // <Record field='population' label='Population' />
-      // <Record field='rotationPeriod' label='Rotation' />
-      // <Record field='diameter' label='Diameter' /> 

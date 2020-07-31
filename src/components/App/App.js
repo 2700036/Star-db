@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from '../Header/Header';
 import RandomPlanet from '../RandomPlanet/RandomPlanet';
 import './app.css';
@@ -10,9 +10,13 @@ import StarshipPage from '../pages/StarShipsPage';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { StarshipDetails, PersonDetails, PlanetDetails } from '../sw-components/sw-details';
 import Record from '../Record/Record';
+import LoginPage from '../pages/login-page';
+import SecretPage from '../pages/secret-page';
+
 
 const App = () => {
   const swapiService = new SwapiService();
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <SwapiContext.Provider value={swapiService}>
@@ -62,6 +66,21 @@ const App = () => {
                 </PlanetDetails>
               )
             }
+          }
+          />
+          <Route 
+          path='/login'
+          render={
+            ()=><LoginPage 
+            isLoggedIn={isLoggedIn}
+            onLogin={()=>setIsLoggedIn(true)}
+            />
+          }
+          />
+          <Route 
+          path='/secret'
+          render={
+            ()=><SecretPage isLoggedIn={isLoggedIn}/>
           }
           />
         </div>
